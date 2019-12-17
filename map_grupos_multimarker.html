@@ -1,0 +1,138 @@
+<!doctype HTML>
+<html>
+<script src="aframe.min.js"></script>
+<script src="aframe-ar.js"></script>
+
+<script>
+
+	var ledActual=null , batActual=null, resActual=null, intActual=null
+	var valorLed=0, valorBat=0, valorRes=0, valorInt=0
+	
+	const nombres = ['mkled','mkbat','mkres','mkint','mkled2','mkbat2','mkres2','mkint2']
+       
+	const valores = { 'mkled': 1, 'mkbat': 10, 'mkres': 100, 'mkint': 0,
+					'mkled2': 2, 'mkbat2': 20, 'mkres2': 500, 'mkint2': 1};
+					
+	const tipos = { 'mkled': 'led', 'mkbat': 'bateria', 'mkres': 'resistencia', 'mkint': 'interruptor',
+					'mkled2': 'led', 'mkbat2': 'bateria', 'mkres2': 'resistencia', 'mkint2': 'interruptor'};
+	
+	
+	function encontrado(marcador){
+		console.log('encontrado '+marcador.id +' tipo: '+tipos[marcador.id] 
+				+'valor: '+valores[marcador.id])
+		
+	}
+	
+	function perdido(marcador){
+		console.log('perdido '+marcador.id +' tipo: '+tipos[marcador.id] 
+				+'valor: '+valores[marcador.id])
+	}
+	
+
+    AFRAME.registerComponent('compdistancia', {
+	
+	init: function() {
+	
+	sceneEl = document.querySelector('a-scene'); 
+       
+       var elementos = nombres.map( (id)=> document.getElementById(id) )
+	
+	elementos.forEach((elem)=>elem.addEventListener("markerFound", ()=>encontrado(elem)))
+	
+	elementos.forEach((elem)=>elem.addEventListener("markerLost", ()=>perdido(elem)))
+	
+	},
+      
+      tick: function(){/*
+      
+      if(mkledEl.object3D.visible && mkbatEl.object3D.visible
+	   && mkresEl.object3D.visible && mkintEl.object3D.visible){
+      
+	      let ledPos = mkledEl.getAttribute('position')
+	      let batPos = mkbatEl.getAttribute('position')
+	      let resPos = mkresEl.getAttribute('position')
+	      let intPos = mkintEl.getAttribute('position')
+	      
+	      
+		if ( (ledPos.distanceTo(batPos) < 5)  &&
+			(ledPos.distanceTo(resPos) < 5) &&
+			(ledPos.distanceTo(intPos) < 5) &&
+			(batPos.distanceTo(resPos) < 5) &&
+			(batPos.distanceTo(intPos) < 5) &&
+			(resPos.distanceTo(intPos) < 5)
+			){
+				console.log("wololo")
+			}
+	      
+	      }
+	*/}      
+    })
+    
+    </script>
+
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene compdistancia embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3_PARITY65;'>
+		<a-assets>
+			<a-asset-item id="led" src="led.gltf" ></a-asset-item>
+			<a-asset-item id="bateria" src="bateria.gltf" ></a-asset-item>
+			<a-asset-item id="resistencia" src="resistencia.gltf" ></a-asset-item>
+			<a-asset-item id="interruptor" src="interruptor.gltf" ></a-asset-item>
+			<a-asset-item id="led2" src="led.gltf" ></a-asset-item>
+			<a-asset-item id="bateria2" src="bateria.gltf" ></a-asset-item>
+			<a-asset-item id="resistencia2" src="resistencia.gltf" ></a-asset-item>
+			<a-asset-item id="interruptor2" src="interruptor.gltf" ></a-asset-item>
+		</a-assets>
+	
+		<a-marker id='mkled' type='barcode' value='16'>
+			<a-gltf-model src="#led"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		<a-marker id='mkbat' type='barcode' value='1'>
+			<a-gltf-model src="#bateria"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		<a-marker id='mkres' type='barcode' value='6'>
+			<a-gltf-model src="#resistencia"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		<a-marker id='mkint' type='barcode' value='12'>
+			<a-gltf-model src="#interruptor"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		<a-marker id='mkled2' type='barcode' value='29'>
+			<a-gltf-model src="#led2"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		<a-marker id='mkbat2' type='barcode' value='18'>
+			<a-gltf-model src="#bateria2"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		<a-marker id='mkres2' type='barcode' value='23'>
+			<a-gltf-model src="#resistencia2"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		<a-marker id='mkint2' type='barcode' value='26'>
+			<a-gltf-model src="#interruptor2"  
+					      animation="property: rotation; to:360 360 0; dur: 3000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+		
+		
+		<a-entity camera></a-entity>
+	</a-scene>
+</body>
+</html>

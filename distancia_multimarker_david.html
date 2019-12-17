@@ -1,0 +1,124 @@
+<!doctype HTML>
+<html>
+<script src="aframe.min.js"></script>
+<script src="aframe-ar.js"></script>
+
+<script>
+	var mkledEl
+	var mkbatEl
+	var mkresEl
+	var mkintEl
+	var sceneEl
+
+    AFRAME.registerComponent('compdistancia', {
+	init: function() {
+       sceneEl = document.querySelector('a-scene');
+
+       mkledEl = document.getElementById('mkled');
+	mkbatEl = document.getElementById('mkbat');
+	mkresEl = document.getElementById('mkres');
+
+      },
+
+      tick: function(){
+
+      if(mkledEl.object3D.visible && mkbatEl.object3D.visible
+	   && mkresEl.object3D.visible && mkintEl.object3D.visible){
+
+	      let ledPos = mkledEl.getAttribute('position')
+	      let batPos = mkbatEl.getAttribute('position')
+	      let resPos = mkresEl.getAttribute('position')
+	      let intPos = mkintEl.getAttribute('position')
+
+
+		if ( (ledPos.distanceTo(batPos) < 5)  &&
+			(ledPos.distanceTo(resPos) < 5) &&
+			(ledPos.distanceTo(intPos) < 5) &&
+			(batPos.distanceTo(resPos) < 5) &&
+			(batPos.distanceTo(intPos) < 5) &&
+			(resPos.distanceTo(intPos) < 5)
+			){
+				console.log("wololo")
+			}
+
+	      }
+	}
+    })
+
+
+    </script>
+
+<body style='margin : 0px; overflow: hidden;'>
+	<a-scene compdistancia embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+		<a-assets>
+			<a-asset-item id="led" src="led.gltf" ></a-asset-item>
+			<a-asset-item id="bateria" src="bateria.gltf" ></a-asset-item>
+			<a-asset-item id="resistencia" src="resistencia.gltf" ></a-asset-item>
+			<a-asset-item id="interruptor" src="interruptor.gltf" ></a-asset-item>
+		</a-assets>
+
+		<a-marker id='mkled' preset='custom' type='pattern' url='/pattern-files/pattern-letterA.patt'>
+			<a-gltf-model src="#led"
+					      animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+
+		<a-marker id='mkbat' preset='custom' type='pattern' url='/pattern-files/pattern-letterB.patt'>
+			<a-gltf-model src="#bateria"
+					      animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+
+		<a-marker id='mkres' preset='custom' type='pattern' url='/pattern-files/pattern-letterC.patt'>
+			<a-gltf-model src="#resistencia"
+					      animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+
+		<a-marker id='mkint0' preset='custom' type='pattern' url='/pattern-files/pattern-letterD.patt'>
+			<a-gltf-model src="#interruptor"
+					      animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+
+		<a-marker id='mkint1' preset='custom' type='pattern' url='/pattern-files/pattern-letterF.patt'>
+			<a-gltf-model src="#interruptor"
+								animation="property: rotation; to:360 0 0; dur: 5000; easing: linear; loop: true">
+			</a-gltf-model>
+		</a-marker>
+
+
+		<a-entity camera></a-entity>
+	</a-scene>
+</body>
+</html>
+
+
+<script>
+
+
+document.getElementById('mkint0').addEventListener("markerFound", (e)=>{
+console.log("found")
+	mkintEl = document.getElementById('mkint0');
+	document.getElementById('mkint1').object3D.visible = false;
+})
+
+document.getElementById('mkint1').addEventListener("markerFound", (e)=>{
+console.log("found")
+	mkintEl = document.getElementById('mkint1');
+})
+
+
+var n = document.getElementById('mkint1')
+n.addEventListener("markerFound", (e)=>{
+console.log("found")
+	mkintEl = document.getElementById('mkint1');
+})
+
+n.addEventListener("markerLost", (e)=>{
+console.log("lost")
+	mkintEl = document.getElementById('mkint0');
+})
+
+
+</script>

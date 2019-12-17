@@ -1,0 +1,666 @@
+<!doctype HTML>
+<html>
+<script src="aframe.min.js"></script>
+<script src="aframe-ar.js"></script>
+
+
+
+
+
+		<body style='margin : 0px; overflow: hidden;'>
+			<a-scene compdistancia embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3_PARITY65;'>
+				<a-assets>
+					<a-asset-item id="led" src="led.gltf" ></a-asset-item>
+					<a-asset-item id="bateria" src="bateria.gltf" ></a-asset-item>
+					<a-asset-item id="resistencia" src="resistencia.gltf" ></a-asset-item>
+					<a-asset-item id="interruptor" src="interruptorcerrado.gltf" ></a-asset-item>
+					<a-asset-item id="led2" src="ledverde.gltf" ></a-asset-item>
+					<a-asset-item id="bateria2" src="bateria.gltf" ></a-asset-item>
+					<a-asset-item id="resistencia2" src="resistencia.gltf" ></a-asset-item>
+					<a-asset-item id="interruptor2" src="interruptor.gltf" ></a-asset-item>
+				</a-assets>
+
+
+				<a-marker id='mkled' valor='1' tipo='led' type='barcode' value='16'>
+					<a-gltf-model src="#led" class="animacionAR" scale="1.2 1.2 1.2"
+							      animation="property: rotation; to:0 360 0; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+				</a-marker>
+
+				<a-marker id='mkbat' valor='500' tipo='bateria' type='barcode' value='1'>
+					<a-gltf-model src="#bateria" class="animacionAR" rotation="0 0 90" scale="1.2 1.2 1.2"
+							      animation="property: rotation; to:0 360 90; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+				</a-marker>
+
+				<a-marker id='mkres' valor='300' tipo='resistencia'  type='barcode' value='6'>
+					<a-gltf-model src="#resistencia"  class="animacionAR" rotation="0 0 90"
+							      animation="property: rotation; to:0 360 90; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+				</a-marker>
+
+				<a-marker id='mkint' valor='1' tipo='interruptor' type='barcode' value='12'>
+					<a-gltf-model src="#interruptor" class="animacionAR" scale="0.6 0.6 0.6"
+							      animation="property: rotation; to:0 360 0; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+				</a-marker>
+
+				<a-marker id='mkled2' valor='2' tipo='led' type='barcode' value='29'>
+					<a-gltf-model src="#led2" class="animacionAR" scale="1.2 1.2 1.2"
+							      animation="property: rotation; to:0 360 0; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+
+
+				</a-marker>
+
+				<a-marker id='mkbat2' valor='200' tipo='bateria' type='barcode' value='18'>
+					<a-gltf-model src="#bateria2" class="animacionAR" rotation="0 0 90" scale="1.2 1.2 1.2"
+							      animation="property: rotation; to:0 360 90; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+				</a-marker>
+
+				<a-marker id='mkres2' valor='1500' tipo='resistencia' type='barcode' value='23'>
+					<a-gltf-model src="#resistencia2" class="animacionAR" rotation="0 0 90"
+							      animation="property: rotation; to:0 360 90; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+				</a-marker>
+
+				<a-marker id='mkint2' valor='2' tipo='interruptor' type='barcode' value='26'>
+					<a-gltf-model src="#interruptor2" class="animacionAR" scale="0.6 0.6 0.6"
+							      animation="property: rotation; to:0 360 0; dur: 7000; easing: linear; loop: true">
+					</a-gltf-model>
+				</a-marker>
+
+
+         <a-entity id="circuitoOn" scale="0.09 0.09 0.09" rotation="-90 0 0" position="0 -0.6 0"></a-entity>
+
+         <a-entity id="circuitoOff" scale="0.09 0.09 0.09" rotation="-90 0 0" position="0 -0.6 0"></a-entity>
+
+
+         <a-marker id='lamparaOff'  type='barcode' value='13'>
+
+				</a-marker>
+
+				<a-marker id='lamparaOn'  type='barcode' value='31'>
+
+			 </a-marker>
+
+			 <a-marker id='interruptorOff'  type='barcode' value='20'>
+
+		 </a-marker>
+
+		 <a-marker id='interruptorOn'  type='barcode' value='5'>
+
+		</a-marker>
+
+
+
+			 <a-marker id='skull'  type='barcode' value='7'>
+				 <a-gltf-model src="/skull/scene.gltf"  scale="1.7 1.7 1.7"
+		                 animation="property: rotation; to:0 360 0; dur: 10000; easing: linear; loop: true">
+				 </a-gltf-model>
+
+			</a-marker>
+
+			<a-marker id='earth'  type='barcode' value='21'>
+				<a-gltf-model src="/earth/scene.gltf"  scale="0.6 0.6 0.6"
+				animation="property: rotation; to:0 360 0; dur: 7000; easing: linear; loop: true">
+				</a-gltf-model>
+
+		 </a-marker>
+
+				 	<a-entity camera position=" 0 0 6"></a-entity>
+			</a-scene>
+
+
+		</body>
+</html>
+
+
+
+<script>
+	var mkledEl
+	var mkbatEl
+	var mkresEl
+	var mkintEl
+	var sceneEl
+
+	const nombres = ['mkled','mkbat','mkres','mkint','mkled2','mkbat2','mkres2','mkint2']
+
+	function encontrado(marcador){
+		/*console.log('encontrado '+marcador.id +' tipo: '+tipos[marcador.id]
+				+'valor: '+valores[marcador.id])*/
+		console.log('encontrado '+marcador.id +' tipo: '+marcador.getAttribute('tipo')  +' valor: ' + marcador.getAttribute('valor'));
+		if (marcador.getAttribute('tipo') == 'led') {
+			mkledEl = document.getElementById(marcador.id);
+		} else if (marcador.getAttribute('tipo') == 'resistencia') {
+		  mkresEl = document.getElementById(marcador.id);
+		} else if (marcador.getAttribute('tipo') == 'interruptor') {
+			mkintEl = document.getElementById(marcador.id);
+		} else if (marcador.getAttribute('tipo') == 'bateria') {
+			mkbatEl = document.getElementById(marcador.id);
+
+   }
+
+		/*	esferas = document.getElementsByClassName("esfera");
+
+
+Array.from(esferas).forEach(element => element.parentNode.removeChild(element));*/
+		}
+
+
+
+
+
+	function perdido(marcador){
+		/*console.log('perdido '+marcador.id +' tipo: '+tipos[marcador.id]
+				+'valor: '+valores[marcador.id])*/
+		console.log('perdido '+marcador.id +' tipo: '+marcador.getAttribute('tipo')  +' valor: ' + marcador.getAttribute('valor'));
+	}
+
+
+    AFRAME.registerComponent('compdistancia', {
+	init: function() {
+       sceneEl = document.querySelector('a-scene');
+       /*
+       	mkledEl = document.getElementById('mkled');
+				mkbatEl = document.getElementById('mkbat');
+				mkresEl = document.getElementById('mkres');
+				mkintEl = document.getElementById('mkint');
+*/
+
+
+				sceneEl = document.querySelector('a-scene');
+
+             var elementos = nombres.map( (id)=> document.getElementById(id) )
+             esferas = document.getElementsByClassName("esfera");
+						 if (mkbatEl != undefined) {
+						 Array.from(esferas).forEach(element => element.setAttribute('animation', {
+		 				 dur: mkbatEl.getAttribute('valor')
+		 					 }));
+             };
+				elementos.forEach((elem)=>elem.addEventListener("markerFound", ()=>encontrado(elem)))
+
+				elementos.forEach((elem)=>elem.addEventListener("markerLost", ()=>perdido(elem)))
+      },
+
+
+
+      tick: function(){
+
+			 if (!(document.getElementById('lamparaOff') == undefined) && (document.getElementById('lamparaOff').object3D.visible)) {
+				 document.getElementById('circuitoOff').object3D.visible = true;
+			 } else {
+				 document.getElementById('circuitoOff').object3D.visible = false;
+			}
+
+			if (!(document.getElementById('lamparaOn') == undefined) && (document.getElementById('lamparaOn').object3D.visible)) {
+
+				document.getElementById('circuitoOn').object3D.visible = true;
+			} else {
+				document.getElementById('circuitoOn').object3D.visible = false;
+		 }
+
+
+     if (!((mkledEl == undefined) || (mkbatEl == undefined) || (mkresEl == undefined) || (mkintEl == undefined))) {
+      if(mkledEl.object3D.visible && mkbatEl.object3D.visible
+	   && mkresEl.object3D.visible && mkintEl.object3D.visible){
+			 animaciones = document.getElementsByClassName('animacionAR');
+		 	Array.from(animaciones).forEach((elem)=> elem.object3D.visible = false);
+
+       durac = parseInt(mkresEl.getAttribute('valor')) + parseInt(mkbatEl.getAttribute('valor'));
+       if (durac <= 500) {
+				 colorLed = 255;
+			 } else if (durac <=800) {
+				 colorLed = 180;
+			 } else if (durac <= 1700) {
+				 colorLed = 100;
+			 } else {
+				 colorLed = 50;
+			 }
+				if (mkledEl.getAttribute('id') == 'mkled') {
+					if (durac <= 500) {
+						ledSphere.setAttribute("color", "rgb(0, 0, 0)" );
+					} else {
+           ledSphere.setAttribute("color", "rgb("+colorLed+", 0, 0)" );
+				  }
+				} else {
+          ledSphere.setAttribute("color", "rgb(0,"+colorLed+", 0)" );
+				}
+
+	      let ledPos = mkledEl.getAttribute('position')
+	      let batPos = mkbatEl.getAttribute('position')
+	      let resPos = mkresEl.getAttribute('position')
+	      let intPos = mkintEl.getAttribute('position')
+
+     posEjesBat = JSON.stringify(batPos);
+		 parseBat = JSON.parse(posEjesBat);
+		 ejeXBat = parseBat.x;
+
+
+		 posEjesLed = JSON.stringify(ledPos);
+		 parseLed = JSON.parse(posEjesLed);
+	  	ejeXLed = parseLed.x;
+
+
+			posEjesRes = JSON.stringify(resPos);
+			parseRes = JSON.parse(posEjesRes);
+			ejeyRes = parseRes.y;
+
+
+			posEjesInt = JSON.stringify(intPos);
+			parseInte = JSON.parse(posEjesInt);
+			ejeyInt = parseInte.y;
+
+		if ( (ledPos.distanceTo(batPos) < 8)  &&
+			(ledPos.distanceTo(resPos) < 8) &&
+			(ledPos.distanceTo(intPos) < 8) &&
+			(batPos.distanceTo(resPos) < 8) &&
+			(batPos.distanceTo(intPos) < 8) &&
+			(resPos.distanceTo(intPos) < 8) &&
+      (ejeXBat < ejeXLed) &&
+			(ejeyInt < ejeyRes)
+			){
+
+
+
+				Array.from(esferas).forEach(element => element.setAttribute('animation', {
+				 dur: durac
+					 }));
+          if (mkintEl.getAttribute('id') == 'mkint') {
+
+				  	document.getElementById('circuitoOn').object3D.visible = true;
+
+          } else {
+						document.getElementById('circuitoOff').object3D.visible = true;
+					}
+				//console.log("wololo");
+
+			}
+
+		} else {
+			animaciones = document.getElementsByClassName('animacionAR');
+		 Array.from(animaciones).forEach((elem)=> elem.object3D.visible = true);
+
+
+		}
+
+  	}
+
+
+
+
+
+	}
+
+
+
+    })
+    </script>
+
+
+
+
+
+
+<script>
+
+
+
+dur = 1000;
+
+var sceneOn = document.getElementById("circuitoOn");
+var sceneOff = document.getElementById("circuitoOff");
+var interruptorCerradoScene = document.getElementById("interruptorOff");
+var interruptorAbiertoScene = document.getElementById("interruptorOn");
+
+var obj = document.createElement('a-sphere');
+obj.setAttribute('class',"esfera");
+obj.setAttribute("radius","0.5");
+obj.setAttribute("color", "#EF2D5E" );
+obj.setAttribute('animation', {
+			property: 'position',
+	from:  "-20 0 0",
+			to: "20 0 0",
+	dur: dur,
+	easing: "linear",
+	delay: 0,
+	loop: true
+		});
+
+	 sceneOn.appendChild(obj);
+
+
+var obj = document.createElement('a-sphere');
+obj.setAttribute('class',"esfera");
+obj.setAttribute("radius","0.5");
+obj.setAttribute("color", "#EF2D5E" );
+obj.setAttribute('animation', {
+			property: 'position',
+	from:  "20 0 0",
+			to: "20 0 20",
+	dur:dur,
+	easing: "linear",
+	delay: 0,
+	loop: true
+		});
+
+	 sceneOn.appendChild(obj);
+
+
+
+var obj = document.createElement('a-sphere');
+obj.setAttribute('class',"esfera");
+obj.setAttribute("radius","0.5");
+obj.setAttribute("color", "#EF2D5E" );
+obj.setAttribute('animation', {
+			property: 'position',
+	from:  "-20 0 20",
+			to: "-20 0 0",
+	dur:dur,
+	easing: "linear",
+	delay: 0,
+	loop: true
+		});
+
+	 sceneOn.appendChild(obj);
+
+
+
+
+var obj = document.createElement('a-sphere');
+obj.setAttribute('class',"esfera");
+obj.setAttribute("radius","0.5");
+obj.setAttribute("color", "#EF2D5E" );
+obj.setAttribute('animation', {
+			property: 'position',
+	from:  "20 0 20",
+			to: "-20 0 20",
+	dur:dur,
+	easing: "linear",
+	delay: 0,
+	loop: true
+		});
+
+	 sceneOn.appendChild(obj);
+
+
+		var battery = document.createElement('a-gltf-model');
+	battery.setAttribute("src","bateria.gltf");
+			battery.setAttribute("position","-20 0 5");
+			battery.setAttribute("scale","10 10 10");
+	battery.setAttribute('rotation',"90 0 0");
+	sceneOn.appendChild(battery);
+
+
+
+		var resistor = document.createElement('a-gltf-model');
+	resistor.setAttribute("src","resistencia.gltf");
+			resistor.setAttribute("position","4.7 0.04 19.9");
+			resistor.setAttribute("scale","7 7 7");
+	resistor.setAttribute('rotation',"90 0 90");
+ sceneOn.appendChild(resistor);
+
+
+
+
+	var interruptorCer = document.createElement('a-gltf-model');
+		interruptorCer.setAttribute("src","interruptorcerrado.gltf");
+		interruptorCer.setAttribute("position","-1 -0.03 0.45");
+				interruptorCer.setAttribute("scale","2 2 2");
+		interruptorCer.setAttribute('rotation',"-90 0 0");
+		sceneOn.appendChild(interruptorCer);
+
+var led= document.createElement('a-gltf-model');
+	led.setAttribute("src","led.gltf");
+			led.setAttribute("position","20 0.8 9");
+			led.setAttribute("scale","8 8 8");
+	led.setAttribute('rotation',"180 200 0");
+//sceneOn.appendChild(led);
+
+
+ledSphere = document.createElement('a-sphere');
+ledSphere.setAttribute('class',"esferaLed");
+ledSphere.setAttribute("radius","1.5");
+ledSphere.setAttribute("position","20 0.06 10.3");
+ledSphere.setAttribute("color", "#696969" );
+sceneOn.appendChild(ledSphere);
+
+/*
+var lightLed = document.createElement('a-light');
+	lightLed.setAttribute("color","#2d2c2c");
+			lightLed.setAttribute("position","20.2 -7.3 9");
+	    lightLed.setAttribute("type","point");
+			lightLed.setAttribute("intensity","50");
+	sceneOn.appendChild(lightLed);
+*/
+var cyl = document.createElement('a-cylinder');
+cyl.setAttribute('position',"0 0 0");
+cyl.setAttribute("rotation","0 0 90");
+cyl.setAttribute("color","cyan");
+cyl.setAttribute("opacity","0.3");
+cyl.setAttribute("material",{
+	side: "double"
+});
+cyl.setAttribute("height",'40.5');
+cyl.setAttribute("radius","0.4");
+
+
+
+		var cyl3 = document.createElement('a-cylinder');
+cyl3.setAttribute('position',"20 0 10");
+cyl3.setAttribute("rotation","90 0 0");
+cyl3.setAttribute("color","cyan");
+cyl3.setAttribute("opacity","0.3");
+cyl3.setAttribute("material",{
+	side: "double"
+});
+cyl3.setAttribute("height",'20');
+cyl3.setAttribute("radius","0.4");
+
+
+				var cyl5 = document.createElement('a-cylinder');
+cyl5.setAttribute('position',"-20 0 10");
+cyl5.setAttribute("rotation","90 0 0");
+cyl5.setAttribute("color","cyan");
+cyl5.setAttribute("opacity","0.3");
+cyl5.setAttribute("material",{
+	side: "double"
+});
+cyl5.setAttribute("height",'20');
+cyl5.setAttribute("radius","0.4");
+
+				var cyl4 = document.createElement('a-cylinder');
+cyl4.setAttribute('position',"0 0 20");
+cyl4.setAttribute("rotation","0 0 90");
+cyl4.setAttribute("color","cyan");
+cyl4.setAttribute("opacity","0.3");
+cyl4.setAttribute("material",{
+	side: "double"
+});
+cyl4.setAttribute("height",'40.5');
+cyl4.setAttribute("radius","0.4");
+
+
+sceneOn.appendChild(cyl);
+sceneOn.appendChild(cyl3);
+sceneOn.appendChild(cyl4);
+sceneOn.appendChild(cyl5);
+
+
+/****************** SCENE OFF *************/
+var battery = document.createElement('a-gltf-model');
+battery.setAttribute("src","bateria.gltf");
+	battery.setAttribute("position","-20 0 5");
+	battery.setAttribute("scale","10 10 10");
+battery.setAttribute('rotation',"90 0 0");
+sceneOff.appendChild(battery);
+
+
+
+var resistor = document.createElement('a-gltf-model');
+resistor.setAttribute("src","resistencia.gltf");
+	resistor.setAttribute("position","4.7 0.04 19.9");
+	resistor.setAttribute("scale","7 7 7");
+resistor.setAttribute('rotation',"90 0 90");
+sceneOff.appendChild(resistor);
+
+
+var interruptor = document.createElement('a-gltf-model');
+interruptor.setAttribute("src","interruptor.gltf");
+interruptor.setAttribute("position","-1 -0.03 0.45");
+	interruptor.setAttribute("scale","2 2 2");
+interruptor.setAttribute('rotation',"-90 0 0");
+sceneOff.appendChild(interruptor);
+
+
+
+ledSphere1 = document.createElement('a-sphere');
+ledSphere1.setAttribute('class',"esferaLed");
+ledSphere1.setAttribute("radius","1.5");
+ledSphere1.setAttribute("position","20 0.06 10.3");
+ledSphere1.setAttribute("color", "#606060" );
+sceneOff.appendChild(ledSphere1);
+
+
+var cyl11a = document.createElement('a-cylinder');
+cyl11a.setAttribute('position',"11.7 0 0");
+cyl11a.setAttribute("rotation","0 0 90");
+cyl11a.setAttribute("color","cyan");
+cyl11a.setAttribute("opacity","0.3");
+cyl11a.setAttribute("material",{
+	side: "double"
+});
+cyl11a.setAttribute("height",'17');
+cyl11a.setAttribute("radius","0.4");
+
+var cyl11b = document.createElement('a-cylinder');
+cyl11b.setAttribute('position',"-12.7 0 0");
+cyl11b.setAttribute("rotation","0 0 90");
+cyl11b.setAttribute("color","cyan");
+cyl11b.setAttribute("opacity","0.3");
+cyl11b.setAttribute("material",{
+	side: "double"
+});
+cyl11b.setAttribute("height",'15');
+cyl11b.setAttribute("radius","0.4");
+
+
+
+		var cyl33 = document.createElement('a-cylinder');
+cyl33.setAttribute('position',"20 0 10");
+cyl33.setAttribute("rotation","90 0 0");
+cyl33.setAttribute("color","cyan");
+cyl33.setAttribute("opacity","0.3");
+cyl33.setAttribute("material",{
+	side: "double"
+});
+cyl33.setAttribute("height",'20');
+cyl33.setAttribute("radius","0.4");
+
+
+				var cyl55 = document.createElement('a-cylinder');
+cyl55.setAttribute('position',"-20 0 10");
+cyl55.setAttribute("rotation","90 0 0");
+cyl55.setAttribute("color","cyan");
+cyl55.setAttribute("opacity","0.3");
+cyl55.setAttribute("material",{
+	side: "double"
+});
+cyl55.setAttribute("height",'20');
+cyl55.setAttribute("radius","0.4");
+
+				var cyl44 = document.createElement('a-cylinder');
+cyl44.setAttribute('position',"0 0 20");
+cyl44.setAttribute("rotation","0 0 90");
+cyl44.setAttribute("color","cyan");
+cyl44.setAttribute("opacity","0.3");
+cyl44.setAttribute("material",{
+	side: "double"
+});
+cyl44.setAttribute("height",'40.5');
+cyl44.setAttribute("radius","0.4");
+
+sceneOff.appendChild(cyl11a);
+sceneOff.appendChild(cyl11b);
+sceneOff.appendChild(cyl33);
+sceneOff.appendChild(cyl44);
+sceneOff.appendChild(cyl55);
+
+
+/******* INTERRUPTOR ON *******/
+
+var interruptorCer = document.createElement('a-gltf-model');
+	interruptorCer.setAttribute("src","interruptorcerrado.gltf");
+	interruptorCer.setAttribute("position","-1 -0.03 0.45");
+			interruptorCer.setAttribute("scale","0.5 0.5 0.5");
+	interruptorCer.setAttribute('rotation',"-90 0 0");
+	interruptorCerradoScene.appendChild(interruptorCer);
+
+
+	var cyl88 = document.createElement('a-cylinder');
+	cyl88.setAttribute('position',"0 0 0");
+	cyl88.setAttribute("rotation","0 0 90");
+	cyl88.setAttribute("color","cyan");
+	cyl88.setAttribute("opacity","0.3");
+	cyl88.setAttribute("material",{
+		side: "double"
+	});
+	cyl88.setAttribute("height",'40.5');
+	cyl88.setAttribute("radius","0.4");
+	cyl88.setAttribute("scale","0.5 0.5 0.5")
+	interruptorCerradoScene.appendChild(cyl88);
+
+	var elec1 = document.createElement('a-sphere');
+	elec1.setAttribute('class',"esfera");
+	elec1.setAttribute("radius","0.5");
+	elec1.setAttribute("color", "#EF2D5E" );
+	elec1.setAttribute("scale","0.5 0.5 0.5")
+	elec1.setAttribute('animation', {
+				property: 'position',
+		from:  "-20 0 0",
+				to: "20 0 0",
+		dur: 1500,
+		easing: "linear",
+		delay: 0,
+		loop: true
+			});
+
+		 interruptorCerradoScene.appendChild(elec1);
+
+
+		 /******* INTERRUPTOR OFF *******/
+		 var interruptorAbi = document.createElement('a-gltf-model');
+		 	interruptorAbi.setAttribute("src","interruptor.gltf");
+		 	interruptorAbi.setAttribute("position","-1 -0.03 0.45");
+		 			interruptorAbi.setAttribute("scale","0.5 0.5 0.5");
+		 	interruptorAbi.setAttribute('rotation',"-90 0 0");
+		 	interruptorAbiertoScene.appendChild(interruptorAbi);
+
+			var cyl111a = document.createElement('a-cylinder');
+			cyl111a.setAttribute('position',"3.6 -0.1 0.35");
+			cyl111a.setAttribute("rotation","0 0 90");
+			cyl111a.setAttribute("color","cyan");
+			cyl111a.setAttribute("opacity","0.3");
+			cyl111a.setAttribute("scale","0.5 0.5 0.5");
+			cyl111a.setAttribute("material",{
+				side: "double"
+			});
+			cyl111a.setAttribute("height",'15');
+			cyl111a.setAttribute("radius","0.4");
+
+			var cyl111b = document.createElement('a-cylinder');
+			cyl111b.setAttribute('position',"-5.7 -0.1 0.35");
+			cyl111b.setAttribute("rotation","0 0 90");
+			cyl111b.setAttribute("color","cyan");
+			cyl111b.setAttribute("opacity","0.3");
+			cyl111b.setAttribute("scale","0.5 0.5 0.5");
+			cyl111b.setAttribute("material",{
+				side: "double"
+			});
+			cyl111b.setAttribute("height",'15');
+			cyl111b.setAttribute("radius","0.4");
+
+			interruptorAbiertoScene.appendChild(cyl111a);
+			interruptorAbiertoScene.appendChild(cyl111b);
+</script>

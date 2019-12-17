@@ -1,0 +1,259 @@
+<!doctype HTML>
+<html>
+<!--	
+<script src="aframe.min.js"></script>
+<script src="aframe-ar.js"></script>
+-->
+<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/1.7.5/aframe/build/aframe-ar.js"></script>
+
+<script>
+AFRAME.registerComponent('markerhandler', { 
+tick:function() {
+ if(document.querySelector('a-marker').object3D.visible == true) {
+   console.log("gogogo")
+ //document.getElementById('circuito1').style.visibility = 'visible';
+ } 
+ else { 
+  console.log("gogoeeeego")
+ //document.getElementById('circuito1').style.visibility = 'hidden'; 
+ } } });
+
+ 
+</script>
+
+
+<body style='margin : 0px; overflow: hidden;'>
+
+  <a-scene embedded arjs>
+     
+        <a-entity position="0 0 50">
+    <!--     <a-camera fov="0" user-height="40"></a-camera>  -->
+  
+      </a-entity>
+
+	  <a-entity camera position="0 0 80"></a-entity>
+
+  <a-assets>
+    <a-asset-item id="tree" src="electron.gltf"></a-asset-item>
+  </a-assets>
+   
+
+ <!-- <a-entity gltf-model="#tree" animation-mixer></a-entity>-->
+
+  	<a-marker id="circuito11" preset="kanji">
+
+                 <!-- Basic cylinder. -->
+
+  	</a-marker>
+	
+	 <!-- <a-gltf-model src="url(baeria.gltf" position="0 2 0.25" rotation="90 180 0" scale="0.1 0.1 0.1" > </a-gltf-model>-->
+	
+	
+	
+	  	<a-marker id="circuito12" preset="Hiro">
+               <a-entity gltf-model="url(electron.gltf)" scale="0.2 0.2 0.2"></a-entity>
+
+                 <!-- Basic cylinder. -->
+
+  	</a-marker>
+	
+  	<a-entity camera></a-entity>
+         
+    </a-scene>
+</body>
+</html>
+
+
+<script>
+
+
+
+var scene = document.querySelector('a-marker');
+	 var scene = document.getElementById("circuito11"); 
+	 var scene2 = document.getElementById("circuito12"); 
+	 
+	  for (var j=0; j<10; j++) {
+	  
+	  var obj = document.createElement('a-sphere');
+	  
+	  obj.setAttribute('position',Math.random()+" 0 0");
+	  obj.setAttribute("radius","0.5");
+	  obj.setAttribute("color", "#EF2D5E" );
+	  obj.setAttribute('animation', {
+          property: 'position',
+		  from:  "-20 0 0",
+          to: "20 0 0",
+		  dur:"6000",
+		  easing: "linear",
+		  delay: j*1000,
+		  loop: true
+        });
+
+	     scene.appendChild(obj);
+      
+	  }
+	  
+	 for (var j=0; j<10; j++) {
+	  
+	  var obj = document.createElement('a-sphere');
+	  
+	  obj.setAttribute('position',Math.random()+" 0 0");
+	  obj.setAttribute("radius","0.5");
+	  obj.setAttribute("color", "#EF2D5E" );
+	  obj.setAttribute('animation', {
+          property: 'position',
+		  from:  "20 0 0",
+          to: "20 0 20",
+		  dur:"6000",
+		  easing: "linear",
+		  delay: j*1000,
+		  loop: true
+        });
+
+	     scene.appendChild(obj);
+      
+	  }
+	  
+	  
+	  	 for (var j=0; j<10; j++) {
+	  
+	  var obj = document.createElement('a-sphere');
+	  
+	  obj.setAttribute('position',Math.random()+" 0 0");
+	  obj.setAttribute("radius","0.5");
+	  obj.setAttribute("color", "#EF2D5E" );
+	  obj.setAttribute('animation', {
+          property: 'position',
+		  from:  "-20 0 20",
+          to: "-20 0 0",
+		  dur:"6000",
+		  easing: "linear",
+		  delay: j*1000,
+		  loop: true
+        });
+
+	     scene.appendChild(obj);
+      
+	  }
+	  
+	  	 for (var j=0; j<10; j++) {
+	  
+	  var obj = document.createElement('a-sphere');
+	  
+	  obj.setAttribute('position',Math.random()+" 0 0");
+	  obj.setAttribute("radius","0.5");
+	  obj.setAttribute("color", "#EF2D5E" );
+	  obj.setAttribute('animation', {
+          property: 'position',
+		  from:  "20 0 20",
+          to: "-20 0 20",
+		  dur:"6000",
+		  easing: "linear",
+		  delay: j*1000,
+		  loop: true
+        });
+
+	     scene.appendChild(obj);
+      
+	  }
+	  
+	  	  var battery = document.createElement('a-gltf-model');
+		  battery.setAttribute("src","bateria.gltf");
+          battery.setAttribute("position","-20 0 5");		 
+          battery.setAttribute("scale","10 10 10");		
+		  battery.setAttribute('rotation',"90 0 0");
+		  scene.appendChild(battery);
+          
+
+
+	  	  var resistor = document.createElement('a-gltf-model');
+		  resistor.setAttribute("src","resistencia.gltf");
+          resistor.setAttribute("position","20 0 5");		 
+          resistor.setAttribute("scale","7 7 7");		
+		  resistor.setAttribute('rotation',"90 0 0");
+		
+		  
+		var interruptor = document.createElement('a-gltf-model');
+		  interruptor.setAttribute("src","interruptor.gltf");
+          interruptor.setAttribute("position","0 0 0.5");		 
+          interruptor.setAttribute("scale","2 2 2");		
+		  interruptor.setAttribute('rotation',"-90 0 0");
+		  scene.appendChild(interruptor);
+		  
+		var led= document.createElement('a-gltf-model');
+		  led.setAttribute("src","led.gltf");
+          led.setAttribute("position","0 -1 20.5");		 
+          led.setAttribute("scale","8 8 8");		
+		  led.setAttribute('rotation',"0 100 0");
+		  scene.appendChild(led);
+	  
+	  
+	  var cyl = document.createElement('a-cylinder');
+	  cyl.setAttribute('position',"0 0 0");
+	  cyl.setAttribute("rotation","0 0 90");
+	  cyl.setAttribute("color","cyan");
+	  cyl.setAttribute("opacity","0.3");
+	  cyl.setAttribute("material",{
+	    side: "double"
+		});
+	  cyl.setAttribute("height",'40.5');
+	  cyl.setAttribute("radius","0.4");
+	  
+	  
+	  
+	  	  var cyl3 = document.createElement('a-cylinder');
+	  cyl3.setAttribute('position',"20 0 10");
+	  cyl3.setAttribute("rotation","90 0 0");
+	  cyl3.setAttribute("color","cyan");
+	  cyl3.setAttribute("opacity","0.3");
+	  cyl3.setAttribute("material",{
+	    side: "double"
+		});
+	  cyl3.setAttribute("height",'20');
+	  cyl3.setAttribute("radius","0.4");
+	  
+	  
+	  	  	  var cyl5 = document.createElement('a-cylinder');
+	  cyl5.setAttribute('position',"-20 0 10");
+	  cyl5.setAttribute("rotation","90 0 0");
+	  cyl5.setAttribute("color","cyan");
+	  cyl5.setAttribute("opacity","0.3");
+	  cyl5.setAttribute("material",{
+	    side: "double"
+		});
+	  cyl5.setAttribute("height",'20');
+	  cyl5.setAttribute("radius","0.4");
+	  
+	  	  	  var cyl4 = document.createElement('a-cylinder');
+	  cyl4.setAttribute('position',"0 0 20");
+	  cyl4.setAttribute("rotation","0 0 90");
+	  cyl4.setAttribute("color","cyan");
+	  cyl4.setAttribute("opacity","0.3");
+	  cyl4.setAttribute("material",{
+	    side: "double"
+		});
+	  cyl4.setAttribute("height",'40.5');
+	  cyl4.setAttribute("radius","0.4");
+	  
+	  
+	 	  var cyl2 = document.createElement('a-cylinder');
+	  cyl2.setAttribute('position',"7 0 0");
+	  cyl2.setAttribute("rotation","0 0 90");
+	  cyl2.setAttribute("color","cyan");
+	  cyl2.setAttribute("opacity","0.3");
+	  cyl2.setAttribute("material",{
+	    side: "double"
+		});
+	  cyl2.setAttribute("height",'30');
+	  cyl2.setAttribute("radius","0.4");
+	  
+	  scene.appendChild(cyl);
+	  scene2.appendChild(cyl2);
+	  
+	  scene.appendChild(cyl3);
+	    scene.appendChild(cyl4);
+		  scene.appendChild(cyl5);
+	  scene.appendChild(resistor);
+
+</script>
