@@ -176,7 +176,8 @@ Array.from(esferas).forEach(element => element.parentNode.removeChild(element));
              esferas = document.getElementsByClassName("esfera");
 						 if (mkbatEl != undefined) {
 						 Array.from(esferas).forEach(element => element.setAttribute('animation', {
-		 				 dur: mkbatEl.getAttribute('valor')
+		 				  /*dur: mkbatEl.getAttribute('valor') */
+					            dur: 1000
 		 					 }));
              };
 				elementos.forEach((elem)=>elem.addEventListener("markerFound", ()=>encontrado(elem)))
@@ -265,7 +266,8 @@ Array.from(esferas).forEach(element => element.parentNode.removeChild(element));
 
 
 				Array.from(esferas).forEach(element => element.setAttribute('animation', {
-				 dur: durac
+				 /*dur: durac */
+				   dur: 1000
 					 }));
           if (mkintEl.getAttribute('id') == 'mkint') {
 
@@ -320,9 +322,10 @@ obj.setAttribute("radius","0.5");
 obj.setAttribute("color", "#EF2D5E" );
 obj.setAttribute('animation', {
 			property: 'position',
-	from:  "-20 0 0",
-			to: "20 0 0",
-	dur: dur,
+	from:  "20 0 0",
+			to: "-20 0 0",
+	/*dur: dur,*/
+	dur: 1000,
 	easing: "linear",
 	delay: 0,
 	loop: true
@@ -337,15 +340,36 @@ obj.setAttribute("radius","0.5");
 obj.setAttribute("color", "#EF2D5E" );
 obj.setAttribute('animation', {
 			property: 'position',
-	from:  "20 0 0",
-			to: "20 0 20",
-	dur:dur,
+	from:  "20 0 20",
+			to: "20 0 0",
+	/*dur:dur, */
+	dur: 1000,
 	easing: "linear",
 	delay: 0,
 	loop: true
 		});
 
 	 sceneOn.appendChild(obj);
+
+
+
+var obj = document.createElement('a-sphere');
+obj.setAttribute('class',"esfera");
+obj.setAttribute("radius","0.5");
+obj.setAttribute("color", "#EF2D5E" );
+obj.setAttribute('animation', {
+			property: 'position',
+	from:  "-20 0 0",
+			to: "-20 0 20",
+	/*dur:dur,*/
+	dur:1000,
+	easing: "linear",
+	delay: 0,
+	loop: true
+		});
+
+	 sceneOn.appendChild(obj);
+
 
 
 
@@ -356,27 +380,9 @@ obj.setAttribute("color", "#EF2D5E" );
 obj.setAttribute('animation', {
 			property: 'position',
 	from:  "-20 0 20",
-			to: "-20 0 0",
-	dur:dur,
-	easing: "linear",
-	delay: 0,
-	loop: true
-		});
-
-	 sceneOn.appendChild(obj);
-
-
-
-
-var obj = document.createElement('a-sphere');
-obj.setAttribute('class',"esfera");
-obj.setAttribute("radius","0.5");
-obj.setAttribute("color", "#EF2D5E" );
-obj.setAttribute('animation', {
-			property: 'position',
-	from:  "20 0 20",
-			to: "-20 0 20",
-	dur:dur,
+			to: "20 0 20",
+	/*dur:dur,*/
+	dur:1000,
 	easing: "linear",
 	delay: 0,
 	loop: true
